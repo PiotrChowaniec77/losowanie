@@ -1,19 +1,33 @@
-const btn = document.querySelector("button");
-const names = [];
-const div = document.querySelector('div')
+let arr = [];
 
-const addName = e => {
+const addBtn = document.querySelector(".add");
+const input = document.querySelector("input");
+const cleanBtn = document.querySelector(".clean");
+const showAdviceBtn = document.querySelector(".showAdvice");
+const showOptionsBtn = document.querySelector(".showOptions");
+const div = document.querySelector("div");
+
+addAdvice = e => {
     e.preventDefault();
-    const input = document.querySelector("input");
-    const newName = input.value;
-    if (newName.length && names.indexOf(newName) == -1) {
-        names.push(newName)
-        input.value = ""
-        div.textContent += `${newName}, `
-    } else {
-        alert("zmień imię")
-        throw new Error("to samo")
+    newAdvice = input.value;
+    if (newAdvice) {
+        arr.push(newAdvice);
+        input.value = "";
     }
 };
+showAdvice = () => {
+    indexAdvice = Math.floor(Math.random() * arr.length);
+    div.textContent = arr[indexAdvice];
+};
 
-btn.addEventListener("click", addName);
+showOption = () => {
+    div.textContent = arr.join(", ");
+};
+
+showAdviceBtn.addEventListener("click", showAdvice);
+showOptionsBtn.addEventListener("click", showOption);
+addBtn.addEventListener("click", addAdvice);
+cleanBtn.addEventListener("click", e => {
+    e.preventDefault();
+    arr = [];
+});
