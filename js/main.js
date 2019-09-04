@@ -1,22 +1,19 @@
 const btn = document.querySelector("button");
-const section = document.querySelector("section");
+const names = [];
+const div = document.querySelector('div')
 
-const chars = "ABCDEFGHIJK0123456789";
-
-const codesNumber = 5;
-const charsNumber = 25;
-
-const codesGenerator = () => {
-    for (let i = 0; i < codesNumber; i++) {
-        let code = "";
-        for (let i = 0; i < charsNumber; i++) {
-            const indexChar = Math.floor(Math.random() * chars.length);
-            code += chars[indexChar]
-        }
-        const div = document.createElement("div");
-        div.textContent = code;
-        section.appendChild(div);
+const addName = e => {
+    e.preventDefault();
+    const input = document.querySelector("input");
+    const newName = input.value;
+    if (newName.length && names.indexOf(newName) == -1) {
+        names.push(newName)
+        input.value = ""
+        div.textContent += `${newName}, `
+    } else {
+        alert("zmień imię")
+        throw new Error("to samo")
     }
 };
 
-btn.addEventListener("click", codesGenerator);
+btn.addEventListener("click", addName);
